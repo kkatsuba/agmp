@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -9,7 +12,6 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { SearchComponent } from './components/search/search.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
-import { PrimaryButtonComponent } from './components/primary-button/primary-button.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,14 @@ import { PrimaryButtonComponent } from './components/primary-button/primary-butt
     CoursesPageComponent,
     CourseItemComponent,
     SearchComponent,
-    AuthorizationComponent,
-    PrimaryButtonComponent
+    AuthorizationComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

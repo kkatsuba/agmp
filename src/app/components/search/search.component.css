@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  align-items:  center;
+}
+
+.search-input {
+  width: 500px;
+  margin-right: 50px;
+}

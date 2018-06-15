@@ -1,7 +1,10 @@
 :host {
-  display: flex;
-  border: 1px solid;
-  margin: 20px 0;
-  justify-content: space-between;
-  padding: 10px;
+  display: block;
+  margin-bottom: 20px;
+  max-width: 600px;
+  min-width: 600px;
+}
+
+.course-action-buttons button {
+ margin-right: 5px;
 }
