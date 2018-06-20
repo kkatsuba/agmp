@@ -1,0 +1,19 @@
+.courses-page {
+  margin: 25px;
+}
+
+.courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.courses-search {
+  flex: 1;
+}
+
+.courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
