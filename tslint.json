@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "tslint-eslint-rules"
+  ],
   "rulesDirectory": ["node_modules/codelyzer"],
   "rules": {
     "arrow-return-shorthand": true,
@@ -94,6 +97,7 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "directive-selector": [true, "attribute", "app", "camelCase"],
-    "component-selector": [true, "element", "app", "kebab-case"]
+    "component-selector": [true, "element", "app", "kebab-case"],
+    "object-curly-spacing": [true, "always"]
   }
 }

@@ -12,6 +12,8 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { SearchComponent } from './components/search/search.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { DurationPipe } from './pipes/duration/duration.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AuthorizationComponent } from './components/authorization/authorization
     CoursesPageComponent,
     CourseItemComponent,
     SearchComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    DurationPipe,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
