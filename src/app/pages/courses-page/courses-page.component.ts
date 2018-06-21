@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { deserialize } from 'serializer.ts/Serializer';
 import { ICourse, Course } from '../../models/course';
 import * as courses2 from '../../data/courses.json';
