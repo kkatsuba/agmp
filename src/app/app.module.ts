@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
@@ -19,6 +21,10 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { appStoreProviders } from './redux/app.store';
+import { CoursesService } from './services/courses/courses.service';
+import { LoginRedirectService } from './services/login-redirect/login-redirect.service';
+import { CourseItemDeleteDialogComponent } from './components/course-item-delete-dialog/course-item-delete-dialog.component';
+import { ApiService } from './services/api/api.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,8 @@ import { appStoreProviders } from './redux/app.store';
     AuthorizationComponent,
     DurationPipe,
     BreadcrumbsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    CourseItemDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,12 +48,18 @@ import { appStoreProviders } from './redux/app.store';
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     AuthGuardService,
     AuthorizationService,
-    appStoreProviders
+    appStoreProviders,
+    CookieService,
+    CoursesService,
+    LoginRedirectService,
+    ApiService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CourseItemDeleteDialogComponent]
 })
 export class AppModule { }

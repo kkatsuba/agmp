@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
+import { ScrollingModule } from '@angular/cdk-experimental';
 import {
   MatButtonModule,
   MatButtonToggleModule,
   MatToolbarModule,
   MatInputModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  MatDialogModule
 } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   exports: [
@@ -15,7 +18,10 @@ import {
     MatToolbarModule,
     MatInputModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    ScrollingModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}

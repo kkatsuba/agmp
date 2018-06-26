@@ -1,7 +1,7 @@
 import { Type } from 'serializer.ts/Decorators';
 
 export interface ICourse {
-  id: number;
+  id: string;
   title: string;
   description?: string;
   createdDate?: Date;
@@ -9,7 +9,7 @@ export interface ICourse {
 }
 
 export class Course implements ICourse {
-  id: number;
+  _id: string;
 
   title: string;
 
@@ -19,4 +19,18 @@ export class Course implements ICourse {
   createdDate?: Date;
 
   duration?: number;
+
+  get id() {
+    return this._id;
+  }
+  set id(id) {
+    this._id = id;
+  }
+}
+
+export interface CoursesResponse {
+  total: number;
+  limit: number;
+  skip: number;
+  data: Array<Course>;
 }

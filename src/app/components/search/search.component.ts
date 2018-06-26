@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoursesService } from '../../services/courses/courses.service';
 
 @Component({
   selector: 'app-search',
@@ -8,9 +9,9 @@ import { Component } from '@angular/core';
 export class SearchComponent {
   searchValue: string;
 
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   onSearch() {
-    console.log(this.searchValue);
+    this.coursesService.searchCourses(this.searchValue);
   }
 }

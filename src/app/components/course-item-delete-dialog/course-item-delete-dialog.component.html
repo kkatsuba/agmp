@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Deleting</h1>
+<div mat-dialog-content>
+  <p>Your are really whant delete course <b>"{{data.name}}"</b>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">NO</button>
+  <button mat-raised-button color="primary" (click)="onYesClick()">YES</button>
+</div>

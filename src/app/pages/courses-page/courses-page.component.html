@@ -7,9 +7,17 @@
   <div class="courses-list">
     <app-course-item
       *ngFor="let course of courses"
-      [course]="course"
-      (deleteCourse)="deleteCourse($event)">
+      [course]="course">
     </app-course-item>
   </div>
-  <button mat-raised-button color="primary" class="load-more">Load more</button>
+  <div class="loader-wrapper">
+    <mat-progress-spinner *ngIf="isFetching" mode="indeterminate" ></mat-progress-spinner>
+  </div>
+  <button
+    mat-raised-button color="primary"
+    class="load-more"
+    (click)="loadCourses()"
+    [disabled]="loadMore">
+      Load more
+  </button>
 </div>

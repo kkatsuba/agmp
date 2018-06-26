@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { deserialize } from 'serializer.ts/Serializer';
-import { ICourse, Course } from '../../models/course';
-import * as courses2 from '../../data/courses.json';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ICourse } from '../../models/course';
+import { CoursesService } from '../../services/courses/courses.service';
+import { AppStore } from '../../redux/app.store';
+import { Store } from 'redux';
+import { AppState } from '../../redux/app.state';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,17 +12,29 @@ import * as courses2 from '../../data/courses.json';
 })
 export class CoursesPageComponent implements OnInit {
   courses: Array<ICourse>;
+  isFetching: boolean;
+  loadMore: boolean;
 
-  constructor() {
-    this.courses = new Array<ICourse>();
+  constructor(
+    private coursesService: CoursesService,
+    @Inject(AppStore) private store: Store<AppState>
+  ) {
+    this.store.subscribe(() => this.subscribeStore());
+    this.subscribeStore();
   }
 
   ngOnInit() {
-    this.courses = deserialize<Course[]>(Course, courses2.default);
+    this.loadCourses();
   }
 
-  deleteCourse(courseId: number) {
-    console.log(courseId);
-    this.courses = this.courses.filter(({ id }) => courseId !== id);
+  loadCourses() {
+    this.coursesService.loadNextCourses();
+  }
+
+  private subscribeStore() {
+    const coursesState = this.store.getState().courses;
+    this.isFetching = coursesState.isFetching;
+    this.courses = coursesState.courses;
+    this.loadMore = coursesState.isEnd;
   }
 }
