@@ -12,6 +12,13 @@ import { CoursesPageComponent } from './pages/courses-page/courses-page.componen
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { SearchComponent } from './components/search/search.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { DurationPipe } from './pipes/duration/duration.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { AuthorizationService } from './services/authorization/authorization.service';
+import { appStoreProviders } from './redux/app.store';
 
 @NgModule({
   declarations: [
@@ -22,16 +29,24 @@ import { AuthorizationComponent } from './components/authorization/authorization
     CoursesPageComponent,
     CourseItemComponent,
     SearchComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    DurationPipe,
+    BreadcrumbsComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    AuthorizationService,
+    appStoreProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

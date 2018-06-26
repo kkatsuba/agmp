@@ -1,10 +1,54 @@
 :host {
+  display: inline-block;
+  max-width: 440px;
+}
+
+.course-card {
   display: block;
-  margin-bottom: 20px;
-  max-width: 600px;
-  min-width: 600px;
+  margin-bottom: 30px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-action-buttons {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
 }
 
 .course-action-buttons button {
  margin-right: 5px;
 }
+
+.mat-card-title {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.mat-card-subtitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mat-card-header {
+  flex-direction: column;
+  flex: 1.5;
+}
+
+.mat-card-content {
+  flex: 3;
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    max-width: initial;
+  }
+
+  .course-card {
+    max-height: 250px;
+    height: initial;
+  }
+}
+
