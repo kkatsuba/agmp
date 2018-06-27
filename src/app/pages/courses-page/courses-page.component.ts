@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { deserialize } from 'serializer.ts/Serializer';
 import { ICourse, Course } from '../../models/course';
 import courses2 from '../../data/courses.json';
@@ -8,14 +8,10 @@ import courses2 from '../../data/courses.json';
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.css']
 })
-export class CoursesPageComponent implements OnInit {
+export class CoursesPageComponent {
   courses: Array<ICourse>;
 
   constructor() {
-    this.courses = new Array<ICourse>();
-  }
-
-  ngOnInit() {
     this.courses = deserialize<Course[]>(Course, courses2);
   }
 

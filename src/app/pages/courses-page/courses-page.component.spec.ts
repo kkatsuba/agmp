@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('CoursesPageComponent', () => {
   const courses = [
@@ -52,18 +53,25 @@ describe('CoursesPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     component.courses = courses;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
+    console.log(component);
     expect(component).toBeDefined();
   });
 
   it('should delete course', () => {
     const expected = [courses[0], courses[2]];
     component.deleteCourse(2);
+    fixture.detectChanges();
     expect(component.courses.length).toBe(expected.length);
     expect(component.courses).toEqual(expected);
+    expect(fixture.debugElement.nativeNode.querySelectorAll('app-course-item').length).toBe(expected.length);
+  });
+
+  it('should render items', () => {
+    expect(fixture.debugElement.nativeNode.querySelectorAll('app-course-item').length).toBe(courses.length);
   });
 });
