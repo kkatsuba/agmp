@@ -16,7 +16,6 @@ export class CoursesPageComponent {
   }
 
   deleteCourse(courseId: number) {
-    console.log(courseId);
     this.courses = this.courses.filter(({ id }) => courseId !== id);
   }
 }

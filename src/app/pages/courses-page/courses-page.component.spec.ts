@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { By } from '@angular/platform-browser';
 
 describe('CoursesPageComponent', () => {
   const courses = [
@@ -58,7 +57,6 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should create', () => {
-    console.log(component);
     expect(component).toBeDefined();
   });
 
