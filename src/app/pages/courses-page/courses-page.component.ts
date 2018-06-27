@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { deserialize } from 'serializer.ts/Serializer';
 import { ICourse, Course } from '../../models/course';
-import * as courses2 from '../../data/courses.json';
+import courses2 from '../../data/courses.json';
 
 @Component({
   selector: 'app-courses-page',
@@ -16,7 +16,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courses = deserialize<Course[]>(Course, courses2.default);
+    this.courses = deserialize<Course[]>(Course, courses2);
   }
 
   deleteCourse(courseId: number) {

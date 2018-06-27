@@ -1,8 +1,9 @@
 import { DurationPipe } from './duration.pipe';
 
 describe('DurationPipe', () => {
-  it('create an instance', () => {
+  it('schould parse 100min', () => {
     const pipe = new DurationPipe();
-    expect(pipe).toBeTruthy();
+    const expected = '1h 40min';
+    expect(pipe.transform(100)).toBe(expected);
   });
 });
