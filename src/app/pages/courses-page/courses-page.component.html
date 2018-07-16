@@ -1,12 +1,17 @@
 <div class="courses-page">
   <app-breadcrumbs></app-breadcrumbs>
   <div class="courses-header">
-    <app-search class="courses-search"></app-search>
+    <app-search class="courses-search" (filterChange)="search = $event"></app-search>
     <button mat-raised-button color="primary">Add course</button>
   </div>
+
+  <div *ngIf="!courses.length">
+    No data. Feel free to add new course.
+  </div>
+
   <div class="courses-list">
     <app-course-item
-      *ngFor="let course of courses"
+      *ngFor="let course of courses | filterBy:'title':search"
       [course]="course"
       (deleteCourse)="deleteCourse($event)">
     </app-course-item>

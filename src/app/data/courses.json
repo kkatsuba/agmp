@@ -4,13 +4,15 @@
     "title": "velit est",
     "createdDate": "Thursday, July 30, 2015 8:57 PM",
     "duration": 88,
-    "description": "Ullamco ut tempor labore voluptate laborum exercitation eu excepteur officia ea excepteur. Sunt ipsum commodo deserunt cillum quis nulla irure consectetur nostrud nisi est. Cillum labore laboris duis sint Lorem occaecat proident aliquip. Tempor minim consectetur sint fugiat aute do eiusmod id eu. Enim ipsum qui sunt nostrud."
+    "description": "Ullamco ut tempor labore voluptate laborum exercitation eu excepteur officia ea excepteur. Sunt ipsum commodo deserunt cillum quis nulla irure consectetur nostrud nisi est. Cillum labore laboris duis sint Lorem occaecat proident aliquip. Tempor minim consectetur sint fugiat aute do eiusmod id eu. Enim ipsum qui sunt nostrud.",
+    "topRated": true
   },
   {
     "id": 1,
     "title": "ea aliqua",
-    "createdDate": "Thursday, October 30, 2014 4:21 PM",
+    "createdDate": "Thursday, October 30, 2018 4:21 PM",
     "duration": 35,
+    "topRated": true,
     "description": "Minim duis proident laboris pariatur est aute laborum est et esse. Eu quis sit et sint labore nulla cupidatat sunt qui commodo. Non ut esse anim dolore mollit aliquip. Nisi amet anim do exercitation anim pariatur fugiat aliqua veniam."
   },
   {
@@ -23,7 +25,7 @@
   {
     "id": 3,
     "title": "elit consequat",
-    "createdDate": "Saturday, June 10, 2017 8:32 AM",
+    "createdDate": "Saturday, July 10, 2018 8:32 AM",
     "duration": 46,
     "description": "Commodo cillum voluptate reprehenderit commodo. Lorem in aliquip in quis incididunt. Culpa cupidatat do eu exercitation in ea fugiat ut et qui ea nostrud. Elit magna esse nisi magna nisi dolor."
   },
