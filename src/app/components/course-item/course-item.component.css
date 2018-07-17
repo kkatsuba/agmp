@@ -41,6 +41,14 @@
   flex: 3;
 }
 
+.fa-star {
+  color: #9E9E9E;
+}
+
+.rated {
+  color: #FFC107;
+}
+
 @media screen and (max-width: 768px) {
   :host {
     max-width: initial;

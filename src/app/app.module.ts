@@ -19,6 +19,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { appStoreProviders } from './redux/app.store';
+import { CourseItemBorderDirective } from './directives/course-item-border/course-item-border.directive';
+import { OrderByPipe } from './pipes/order-by/order-by.pipe';
+import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { appStoreProviders } from './redux/app.store';
     AuthorizationComponent,
     DurationPipe,
     BreadcrumbsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    CourseItemBorderDirective,
+    OrderByPipe,
+    FilterByPipe
   ],
   imports: [
     BrowserModule,

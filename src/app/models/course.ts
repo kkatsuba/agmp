@@ -6,6 +6,7 @@ export interface ICourse {
   description?: string;
   createdDate?: Date;
   duration?: number;
+  topRated?: boolean;
 }
 
 export class Course implements ICourse {
@@ -19,4 +20,6 @@ export class Course implements ICourse {
   createdDate?: Date;
 
   duration?: number;
+
+  topRated?: boolean;
 }
