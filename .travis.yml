@@ -1,14 +1,20 @@
 sudo: required
 addons:
   chrome: stable
-
 language: node_js
 node_js:
-  - "lts/*"
-
+- lts/*
 before_script:
-  - npm install -g @angular/cli
-
+- npm install -g @angular/cli
 script:
-  - ng build --prod --aot
-  - ng test
+- ng build --prod --aot
+- ng test
+deploy:
+  provider: firebase
+  on:
+    branch: master
+  token:
+    secure: kpVu7hGYnisRrrZdQRzyH46+cZ83yDY/CmVufNLiwjRtzFHE3XxO8lrrWVPM3FxndYA4GN9pSie4QKNCa9oLGXsfOKPGkJ8xwHZ4UOKZilD2TSY9ob/Ctt/y40Kkc0vMGRIGx3TW0LzFbz82kz3Rcf/yxyVI1b+tv3bstrNQudu7bx3qZB0HTl8iRKj6syWW4eFLi6uLrl1U6HMuOhpno7qPVaoMqchVcmipOmBhiXDg6vQaBtieof3n7EBgMhHeWH4AsuedFZL5QtLEZ18BxVQT6IzF7cU0vM0G4FTBwx2gmlKT7nt3d/O5ZI/sx58fVjTLZaOBS/6nSuTzSIRhBMnjUodGvgZPB57xB5Xd2XZfWZ8hBO5xBnNhLZf1+c6lSqIx0famYAvOzKBFs37rzW3XK4wNjn8YoXU8Q6Bj9q80um4sZNW4Sl8m0naSoNkSGKdJY7uO7UfWOYa11XbBlaSEUwEuvMncQxOkoFsKMyR3lZqQ3Og6j8y4Ty4eYQwJxqfi9FDnnOAprykOIFLIuw6bgjz/umoOhBRFmJuVKCGh7jd/btvR3enpUnasMdVDGPu2I2sgqb6FTuQ7XkeEbgZpehrNo4bASgCruFTs60q5B/sX8/+gIWVCpKErAN9FZVB+4oC7KpUu98Yc2tU6w6FWfdSlUnOw+KkUsppaii4=
+env:
+  global:
+    secure: kpVu7hGYnisRrrZdQRzyH46+cZ83yDY/CmVufNLiwjRtzFHE3XxO8lrrWVPM3FxndYA4GN9pSie4QKNCa9oLGXsfOKPGkJ8xwHZ4UOKZilD2TSY9ob/Ctt/y40Kkc0vMGRIGx3TW0LzFbz82kz3Rcf/yxyVI1b+tv3bstrNQudu7bx3qZB0HTl8iRKj6syWW4eFLi6uLrl1U6HMuOhpno7qPVaoMqchVcmipOmBhiXDg6vQaBtieof3n7EBgMhHeWH4AsuedFZL5QtLEZ18BxVQT6IzF7cU0vM0G4FTBwx2gmlKT7nt3d/O5ZI/sx58fVjTLZaOBS/6nSuTzSIRhBMnjUodGvgZPB57xB5Xd2XZfWZ8hBO5xBnNhLZf1+c6lSqIx0famYAvOzKBFs37rzW3XK4wNjn8YoXU8Q6Bj9q80um4sZNW4Sl8m0naSoNkSGKdJY7uO7UfWOYa11XbBlaSEUwEuvMncQxOkoFsKMyR3lZqQ3Og6j8y4Ty4eYQwJxqfi9FDnnOAprykOIFLIuw6bgjz/umoOhBRFmJuVKCGh7jd/btvR3enpUnasMdVDGPu2I2sgqb6FTuQ7XkeEbgZpehrNo4bASgCruFTs60q5B/sX8/+gIWVCpKErAN9FZVB+4oC7KpUu98Yc2tU6w6FWfdSlUnOw+KkUsppaii4=
