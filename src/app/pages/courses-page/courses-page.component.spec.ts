@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Course } from '../../models/course';
 import { FilterByPipe } from '../../pipes/filter-by/filter-by.pipe';
 import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

@@ -11,7 +11,7 @@ describe('CourseItemDeleteDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CourseItemDeleteDialogComponent ],
       providers: [
-        { provide: MatDialogRef, useValue: jasmine.createSpyObj('MatDialogRef', ['close']) }
+        { provide: MatDialogRef, useValue: jasmine.createSpyObj('MatDialogRef', ['close']) },
         { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     })

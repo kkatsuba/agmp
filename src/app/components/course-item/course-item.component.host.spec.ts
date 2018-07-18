@@ -14,7 +14,7 @@ const testCourse = {
   duration: 10,
   description: 'Desc',
   createdDate: new Date()
-}
+};
 
 @Component({
   template: `
@@ -27,8 +27,8 @@ class TestHostComponent {
   removeItem: Course;
   course: Course = testCourse;
 
-  remove(courseId: number) {
-    this.removeItem = courseId;
+  remove(course: Course) {
+    this.removeItem = course;
   }
 }
 
