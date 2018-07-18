@@ -2,24 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthorizationComponent } from './authorization.component';
 import { AuthorizationService } from '../../services/authorization/authorization.service';
-import { AppStore } from '../../redux/app.store';
 import { By } from '@angular/platform-browser';
-
-class MockStore {
-  state = {
-    auth: {
-      email: 'some@email.com'
-    }
-  };
-
-  subscribe(callback) {
-    callback();
-  }
-
-  getState() {
-    return this.state;
-  }
-}
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from '../../redux/app.reducer';
 
 describe('AuthorizationComponent', () => {
   let component: AuthorizationComponent;
@@ -30,7 +15,16 @@ describe('AuthorizationComponent', () => {
       declarations: [ AuthorizationComponent ],
       providers: [
         { provide: AuthorizationService, useValue: jasmine.createSpy('AuthorizationService', AuthorizationService) },
-        { provide: AppStore, useClass: MockStore }
+      ],
+      imports: [
+        StoreModule.forRoot(rootReducer, {
+          initialState: {
+            auth: {
+              email: 'login',
+              validated: true
+            }
+          }
+        })
       ]
     })
     .compileComponents();

@@ -1,19 +1,24 @@
-import { InjectionToken } from '@angular/core';
-import { createStore, Store, compose, StoreEnhancer } from 'redux';
+import { NgModule } from '@angular/core';
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { rootReducer } from './app.reducer';
-import { AppState } from './app.state';
 
-export const AppStore = new InjectionToken('App.store');
-
-const devtools: StoreEnhancer<AppState> = window['devToolsExtension']
-  ? window['devToolsExtension']()
-  : f => f;
-
-export function createAppStore(): Store<AppState> {
-  return createStore(rootReducer, compose(devtools));
+const persistConfig = {
+  keys: ['auth'],
+  rehydrate: true
+};
+export function localStorageSyncReducer(reducer) {
+  return localStorageSync(persistConfig)(reducer);
 }
 
-export const appStoreProviders = [
-  { provide: AppStore, useFactory: createAppStore }
-];
+export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
+
+@NgModule({
+  imports: [
+    StoreModule.forRoot(rootReducer, { metaReducers }),
+    StoreDevtoolsModule.instrument()
+  ]
+})
+export class AppStore {}

@@ -1,17 +1,17 @@
-import { Action, ActionCreator } from 'redux';
+import { Action } from '@ngrx/store';
 
-export const SIGN_IN = 'SIGN_IN';
-export interface SignInAction extends Action {
+export const SIGN_IN = '[Auth] SIGN_IN';
+export const LOG_OFF = '[Auth] LOG_OFF';
+
+export interface ISignInAction extends Action {
+  type: string;
   email: string;
-  password: string;
 }
-export const signIn: ActionCreator<SignInAction> = (email: string, password: string) => ({
+export const signIn = (email: string) => ({
   type: SIGN_IN,
-  email,
-  password
+  email
 });
 
-export const LOG_OFF = 'LOG_OFF';
-export const logOff: ActionCreator<Action> = () => ({
+export const logOff: Action = {
   type: LOG_OFF
-});
+};

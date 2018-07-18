@@ -1,4 +1,4 @@
 export interface AuthorizationState {
-  validated: boolean,
+  validated: boolean;
   email: string;
 }

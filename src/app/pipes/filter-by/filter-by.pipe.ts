@@ -9,7 +9,7 @@ export class FilterByPipe implements PipeTransform {
       return data;
     }
 
-    const search = new RegExp(`${value}`, 'gi')
+    const search = new RegExp(`${value}`, 'gi');
     return data.filter(item => item[field].match(search));
   }
 }

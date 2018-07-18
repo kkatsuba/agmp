@@ -1,7 +1,7 @@
-import { Reducer, combineReducers } from 'redux';
+import { ActionReducerMap } from '@ngrx/store';
 import { AuthorizationReducer } from './authorization/authorization.reducer';
 import { AppState } from './app.state';
 
-export const rootReducer: Reducer<AppState> = combineReducers<AppState>({
+export const rootReducer: ActionReducerMap<AppState> = {
   auth: AuthorizationReducer
-});
+};

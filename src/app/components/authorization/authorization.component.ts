@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization/authorization.service';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../redux/app.state';
-import { AppStore } from '../../redux/app.store';
-import { Store } from 'redux';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-authorization',
@@ -10,22 +10,13 @@ import { Store } from 'redux';
   styleUrls: ['./authorization.component.css']
 })
 export class AuthorizationComponent {
-  login: string;
+  login: Observable<string>;
 
-  constructor(
-    private auth: AuthorizationService,
-    @Inject(AppStore) private store: Store<AppState>
-  ) {
-    this.store.subscribe(() => this.subscribeStore());
-    this.subscribeStore();
+  constructor(private auth: AuthorizationService, private store: Store<AppState>) {
+    this.login = this.store.select(state => state.auth.email);
   }
 
   logOff() {
     this.auth.logOff();
-  }
-
-  subscribeStore() {
-    const state = this.store.getState();
-    this.login = state.auth.email;
   }
 }

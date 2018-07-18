@@ -18,10 +18,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { AuthorizationService } from './services/authorization/authorization.service';
-import { appStoreProviders } from './redux/app.store';
 import { CourseItemBorderDirective } from './directives/course-item-border/course-item-border.directive';
 import { OrderByPipe } from './pipes/order-by/order-by.pipe';
 import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
+import { CoursesService } from './services/courses/courses.service';
+import { CourseItemDeleteDialogComponent } from './components/course-item-delete-dialog/course-item-delete-dialog.component';
+import { AppStore } from './redux/app.store';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
     LoginPageComponent,
     CourseItemBorderDirective,
     OrderByPipe,
-    FilterByPipe
+    FilterByPipe,
+    CourseItemDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +50,14 @@ import { FilterByPipe } from './pipes/filter-by/filter-by.pipe';
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AppStore
   ],
   providers: [
     AuthGuardService,
     AuthorizationService,
-    appStoreProviders
+    CoursesService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CourseItemDeleteDialogComponent]
 })
 export class AppModule { }

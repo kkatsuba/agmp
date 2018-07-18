@@ -1,15 +1,13 @@
 import { CanActivate, Router } from '@angular/router';
-import { Injectable, Inject } from '@angular/core';
-import { AppStore } from '../../redux/app.store';
-import { Store } from 'redux';
-import { AppState } from '../../redux/app.state';
+import { Injectable } from '@angular/core';
+import { AuthorizationService } from '../authorization/authorization.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(private router: Router, @Inject(AppStore) private store: Store<AppState>) {}
+  constructor(private router: Router, public authService: AuthorizationService) {}
 
   canActivate(): boolean {
-    if (this.store.getState().auth.validated) {
+    if (this.authService.isAuthenticated()) {
       return true;
     }
 

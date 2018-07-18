@@ -1,7 +1,7 @@
 <mat-card class="course-card" appCourseItemBorder [createdDate]="course.createdDate">
   <mat-card-header>
     <mat-card-title>
-      {{course.title | uppercase}}
+      <span>{{course.title | uppercase}}</span>
       <mat-icon fontIcon="fa-star" fontSet="fa" [ngClass]="{ rated: course.topRated }"></mat-icon>
     </mat-card-title>
     <mat-card-subtitle>

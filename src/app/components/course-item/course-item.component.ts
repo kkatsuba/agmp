@@ -8,11 +8,11 @@ import { ICourse } from '../../models/course';
 })
 export class CourseItemComponent {
   @Input() course: ICourse;
-  @Output() deleteCourse = new EventEmitter<number>();
+  @Output() deleteCourse = new EventEmitter<ICourse>();
 
   constructor() { }
 
   remove() {
-    this.deleteCourse.emit(this.course.id);
+    this.deleteCourse.emit(this.course);
   }
 }

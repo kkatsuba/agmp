@@ -1,21 +1,18 @@
-import { SIGN_IN, LOG_OFF, SignInAction } from './authorization.actions';
+import { SIGN_IN, LOG_OFF, ISignInAction } from './authorization.actions';
 import { AuthorizationState } from './authorization.state';
-import { Reducer, Action } from 'redux';
+import { Action } from '@ngrx/store';
 
 const initialState: AuthorizationState = {
   email: null,
   validated: false
 };
 
-export const AuthorizationReducer: Reducer<AuthorizationState> = (
-  state: AuthorizationState = initialState,
-  action: Action
-): AuthorizationState => {
+export function AuthorizationReducer(state: AuthorizationState = initialState, action: Action): AuthorizationState {
   switch (action.type) {
     case SIGN_IN:
       return {
         validated: true,
-        email: (<SignInAction>action).email
+        email: (<ISignInAction>action).email
       };
     case LOG_OFF: {
       return {
@@ -26,4 +23,4 @@ export const AuthorizationReducer: Reducer<AuthorizationState> = (
     default:
       return state;
   }
-};
+}
