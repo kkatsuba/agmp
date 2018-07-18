@@ -9,9 +9,11 @@ const persistConfig = {
   keys: ['auth'],
   rehydrate: true
 };
-const localStorageSyncReducer = reducer => localStorageSync(persistConfig)(reducer);
+export function localStorageSyncReducer(reducer) {
+  return localStorageSync(persistConfig)(reducer);
+}
 
-const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+export const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
 
 @NgModule({
   imports: [
