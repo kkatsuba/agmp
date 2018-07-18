@@ -4,6 +4,9 @@ import { CourseItemComponent } from './course-item.component';
 import { MaterialModule } from '../../material.module';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { By } from '@angular/platform-browser';
+import { CourseItemBorderDirective } from '../../directives/course-item-border/course-item-border.directive';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Course } from '../../models/course';
 
 describe('CourseItemComponent', () => {
   const course = {
@@ -18,8 +21,11 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, DurationPipe],
-      imports: [MaterialModule]
+      declarations: [CourseItemComponent, DurationPipe, CourseItemBorderDirective],
+      imports: [MaterialModule],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
   }));
 
@@ -35,19 +41,19 @@ describe('CourseItemComponent', () => {
   });
 
   it('title must be in upper case', () => {
-    const courseTitleDebug = fixture.debugElement.query(By.css('.mat-card-title'));
+    const courseTitleDebug = fixture.debugElement.query(By.css('.mat-card-title span'));
     const courseTitle = courseTitleDebug.nativeElement;
 
     expect(courseTitle.textContent).toBe(course.title.toUpperCase());
   });
 
   it('delete course click (triggerEventHandle)', () => {
-    let removeId: number;
-    component.deleteCourse.subscribe((id: number) => removeId = id);
+    let removeItem: Course;
+    component.deleteCourse.subscribe((item: Course) => removeItem = item);
 
     const deleteButtonDebug = fixture.debugElement.query(By.css('.course-action-buttons .mat-warn'));
     deleteButtonDebug.triggerEventHandler('click', null);
 
-    expect(removeId).toBe(course.id);
+    expect(removeItem.id).toBe(course.id);
   });
 });

@@ -1,26 +1,28 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { AuthorizationService } from './authorization.service';
-import { AppStore } from '../../redux/app.store';
-import configureStore from 'redux-mock-store';
 import { Router } from '@angular/router';
+import { Store, State } from '@ngrx/store';
 
 describe('AuthorizationService', () => {
   let service: AuthorizationService;
-  let mockStore;
+  let storeSpy;
+  let stateSpy;
   let routerSpy;
 
   beforeEach(() => {
-    mockStore = configureStore([])({});
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    stateSpy = jasmine.createSpyObj('State', ['value']);
+    storeSpy = jasmine.createSpyObj('Store', ['dispatch']);
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         AuthorizationService,
-        { provide: AppStore, useValue: mockStore },
-        { provide: Router, useValue: routerSpy }
+        { provide: Router, useValue: routerSpy },
+        { provide: State, useValue: stateSpy },
+        { provide: Store, useValue: storeSpy }
       ]
     });
   });

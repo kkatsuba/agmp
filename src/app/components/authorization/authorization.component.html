@@ -1,4 +1,4 @@
-<div>
-  <span>{{login}}</span>
+<div *ngIf="login | async">
+  <span>{{login | async}}</span>
   <button class="log-off" mat-raised-button color="accent" (click)="logOff()">Log off</button>
 </div>

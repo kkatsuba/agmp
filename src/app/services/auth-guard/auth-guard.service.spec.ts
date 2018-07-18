@@ -1,55 +1,55 @@
 import { TestBed, inject } from '@angular/core/testing';
-import configureStore from 'redux-mock-store';
 
 import { AuthGuardService } from './auth-guard.service';
-import { AppStore } from '../../redux/app.store';
 import { Router } from '@angular/router';
+import { AuthorizationService } from '../authorization/authorization.service';
 
 describe('AuthGuardService', () => {
-  let service: AuthGuardService;
-  let mockStore;
-  let routerSpy;
+  let authService: AuthorizationService;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+  const moduleBaseProviders = [
+    AuthGuardService,
+    { provide: Router, useValue: routerSpy }
+  ];
 
-  beforeEach(() => {
-    mockStore = configureStore([])({});
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-  });
+  describe('Not auth user', () => {
+    beforeEach(() => {
+      authService = jasmine.createSpyObj('AuthorizationService', {
+        isAuthenticated: true
+      });
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        AuthGuardService,
-        { provide: AppStore, useValue: mockStore },
-        { provide: Router, useValue: routerSpy }
-      ]
+      TestBed.configureTestingModule({
+        providers: [
+          ...moduleBaseProviders,
+          { provide: AuthorizationService, useValue: authService }
+        ]
+      });
     });
+
+    it('canActivate() must be true', inject([AuthGuardService], (authGuard: AuthGuardService) => {
+      expect(authGuard.canActivate()).toBeTruthy();
+    }));
+
   });
 
-  beforeEach(inject([AuthGuardService], (authService: AuthGuardService) => {
-    service = authService;
-  }));
+  describe('Auth user', () => {
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    beforeEach(() => {
+      authService = jasmine.createSpyObj('AuthorizationService', ['isAuthenticated']);
 
-  it('canActivate() must be true', () => {
-    service['store'] = configureStore([])({
-      auth: {
-        validated: true
-      }
+      TestBed.configureTestingModule({
+        providers: [
+          ...moduleBaseProviders,
+          { provide: AuthorizationService, useValue: authService }
+        ]
+      });
     });
-    expect(service.canActivate()).toBeTruthy();
-  });
 
-  it('canActivate() must be false', () => {
-    service['store'] = configureStore([])({
-      auth: {
-        validated: false
-      }
-    });
-    expect(service.canActivate()).toBeFalsy();
-    expect(routerSpy.navigate.calls.count()).toBe(1);
-    expect(routerSpy.navigate.calls.first().args[0]).toEqual(['/login']);
+    it('canActivate() must be false', inject([AuthGuardService], (authGuard: AuthGuardService) => {
+      expect(authGuard.canActivate()).toBeFalsy();
+      expect(routerSpy.navigate.calls.count()).toBe(1);
+      expect(routerSpy.navigate.calls.first().args[0]).toEqual(['/login']);
+    }));
+
   });
 });
