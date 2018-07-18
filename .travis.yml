@@ -9,11 +9,11 @@ before_script:
 script:
 - ng build --prod --aot
 - ng test
+before_deploy:
+- npm install -g firebase-tools
 deploy:
-  provider: firebase
+  provider: script
+  script: firebase deploy --token "${FIREBASE_TOKEN}"
   skip_cleanup: true
-  project: agmp-d4821
   on:
     branch: master
-  token:
-    secure: XXTmtfPp6WHh645TVVKq1JApXgPeyJLg2ZvdBxY4cintJ+L+HKZB04pULgGC79HGkQ3xRmE1nkgnbW2w+aZIzzL2Oxubrh4kpV8uoG4RT5R19cTFXUSloHb/hG4XQgfHgcazu1L4WiHqmRceLRMqD8lZtZXnr/HOZ3Vzxyt9Eb8fDO4WCTxzvx0iJ9SOH+g1Rs5IbwhT6is8OPTJLjaFObWm7XWmHl/pXpLx6nW0G8MhAGtHpIAUxmPyj/jj3nMUKDqSb7WTWzES1p/owVKarjKxj5p4pPO7cqoiH8SryOu6evgfSeebmmhhJLTfcrEthb4Qv45MCO61Ou/apY2B0vv4xGPbA4J+Z6AGEFW7C3Ec76UMd3g5ZXWgSe3SA4tGk0ZOvo+/+45l49h86hJl385rGVGz5/Tq2eHUjZinSwqK10e8MugqF8RpfQxU5omvEL05mB3fs3WphMriK20Dvsgm4JKB/43FV7TeIcCoxAnDmrtshOsttSIGgmZ1iEVnh75COVZT3q3Zfwxz2FNOXaSV1dq2ynFsz13xh5JA+HJ3rs5lsHYfFH4jYWZKsbAtMqNH5IKpW30cqm4iUWYwSqZu3SSI17f6PYzzJIkP//emDb6KiuXPEFJGH0icIVl/uHIQMTYj3PixKQxttga1nB7t+GHT5zsqH8LGjnCz76M=
