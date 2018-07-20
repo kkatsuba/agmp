@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
-import { SharingModule } from '../../sharing.module';
 import { MaterialModule } from '../../material.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 
@@ -11,7 +10,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
     CommonModule,
     LoginRoutingModule,
     MaterialModule,
-    SharingModule,
     FormsModule,
     ReactiveFormsModule
   ],

@@ -34,7 +34,10 @@
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
-    <input placeholder="Authors" [matChipInputFor]="authorsChip" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addAuthor($event)">
+    <input
+      placeholder="Authors"
+      [matChipInputFor]="authorsChip"
+      (matChipInputTokenEnd)="addAuthor($event)">
   </mat-form-field>
 </form>
 <div class="course-action-buttons">
