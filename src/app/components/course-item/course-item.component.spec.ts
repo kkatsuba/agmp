@@ -7,15 +7,9 @@ import { By } from '@angular/platform-browser';
 import { CourseItemBorderDirective } from '../../directives/course-item-border/course-item-border.directive';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Course } from '../../models/course';
+import { singleCourse as course } from '../../data/mock_courses';
 
 describe('CourseItemComponent', () => {
-  const course = {
-    id: 1,
-    title: 'title',
-    duration: 50,
-    description: 'descriptrion',
-    createdDate: new Date()
-  };
   let component: CourseItemComponent;
   let fixture: ComponentFixture<CourseItemComponent>;
 

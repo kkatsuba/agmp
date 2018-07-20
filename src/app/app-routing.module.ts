@@ -1,23 +1,35 @@
 import { RouterModule, Routes } from '@angular/router';
-import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
 import { NgModule } from '@angular/core';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 
 const router: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
+  {
+    path: 'login',
+    loadChildren: './pages/login/login.module#LoginModule'
+  },
   {
     path: 'courses',
     canActivate: [AuthGuardService],
-    component: CoursesPageComponent,
+    loadChildren: './pages/courses/courses.module#CoursesModule',
     data: {
       breadscrumb: 'Courses'
-    }
+    },
+  },
+  {
+    path: 'course/:id/edit',
+    canActivate: [AuthGuardService],
+    loadChildren: './pages/edit-course/edit-course.module#EditCourseModule'
+  },
+  {
+    path: 'course/new',
+    canActivate: [AuthGuardService],
+    loadChildren: './pages/create-course/create-course.module#CreateCourseModule'
   }
 ];
 
 @NgModule({
+  providers: [AuthGuardService],
   imports: [RouterModule.forRoot(router)],
   exports: [RouterModule]
 })

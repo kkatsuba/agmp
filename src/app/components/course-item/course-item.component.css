@@ -1,6 +1,6 @@
 :host {
   display: inline-block;
-  max-width: 440px;
+  width: 440px;
 }
 
 .course-card {
@@ -51,7 +51,7 @@
 
 @media screen and (max-width: 768px) {
   :host {
-    max-width: initial;
+    width: initial;
   }
 
   .course-card {

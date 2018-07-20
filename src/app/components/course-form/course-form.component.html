@@ -1,0 +1,46 @@
+<mat-chip-list>
+  <mat-chip color="accent" selected>
+    <strong>Fields with '*' symbol are required for filling.</strong>
+  </mat-chip>
+</mat-chip-list>
+<form class="edit-form" [formGroup]="courseForm">
+  <mat-form-field>
+    <mat-label>*Title:</mat-label>
+    <input matInput placeholder="Course title" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>*Description:</mat-label>
+    <textarea matInput placeholder="Description" formControlName="description" class="description-input"></textarea>
+  </mat-form-field>
+  <mat-form-field class="small-input">
+    <mat-label>*Date:</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="createdDate" placeholder="Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div>
+    <mat-form-field class="small-input">
+      <mat-label>*Duration:</mat-label>
+      <input matInput placeholder="Duration" type="number" formControlName="duration" />
+    </mat-form-field>
+    {{courseForm.value.duration | duration }}
+  </div>
+  <mat-form-field>
+    <mat-label>Authors:</mat-label>
+    <mat-chip-list #authorsChip>
+      <mat-chip *ngFor="let author of courseForm.value.authors; let i = index;" removable (removed)="removeAuthor(i)" color="primary"
+        selected>
+        {{author}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <input
+      placeholder="Authors"
+      [matChipInputFor]="authorsChip"
+      (matChipInputTokenEnd)="addAuthor($event)">
+  </mat-form-field>
+</form>
+<div class="course-action-buttons">
+  <button mat-raised-button color="primary" (click)="saveCourse()" [disabled]="isDisabled()">Save</button>
+  <button mat-raised-button color="warn" (click)="cancelSave()">Cancel</button>
+</div>

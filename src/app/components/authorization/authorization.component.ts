@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization/authorization.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../redux/app.state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,8 +10,8 @@ import { Observable } from 'rxjs';
 export class AuthorizationComponent {
   login: Observable<string>;
 
-  constructor(private auth: AuthorizationService, private store: Store<AppState>) {
-    this.login = this.store.select(state => state.auth.email);
+  constructor(private auth: AuthorizationService) {
+    this.login = this.auth.userEmail;
   }
 
   logOff() {

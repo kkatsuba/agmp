@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseItemDeleteDialogComponent } from './course-item-delete-dialog.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '../../../../node_modules/@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 describe('CourseItemDeleteDialogComponent', () => {
   let component: CourseItemDeleteDialogComponent;
