@@ -2,16 +2,18 @@
   <app-breadcrumbs></app-breadcrumbs>
   <div class="courses-header">
     <app-search class="courses-search" (filterChange)="search = $event"></app-search>
-    <button mat-raised-button color="primary">Add course</button>
+    <a routerLink="/course/new">
+      <button mat-raised-button color="primary">Add course</button>
+    </a>
   </div>
 
-  <div *ngIf="!courses.length">
+  <div *ngIf="!(courses$ | async).length">
     No data. Feel free to add new course.
   </div>
 
   <div class="courses-list">
     <app-course-item
-      *ngFor="let course of courses | filterBy:'title':search"
+      *ngFor="let course of (courses$ | async) | filterBy:'title':search"
       [course]="course"
       (deleteCourse)="deleteCourse($event)">
     </app-course-item>

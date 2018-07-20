@@ -7,14 +7,7 @@ import { DurationPipe } from '../../pipes/duration/duration.pipe';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { Course } from '../../models/course';
-
-const testCourse = {
-  id: 1,
-  title: 'Title',
-  duration: 10,
-  description: 'Desc',
-  createdDate: new Date()
-};
+import { singleCourse as testCourse } from '../../data/mock_courses';
 
 @Component({
   template: `

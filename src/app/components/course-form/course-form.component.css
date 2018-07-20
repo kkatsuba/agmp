@@ -1,0 +1,23 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0;
+}
+
+.small-input {
+  width: 250px;
+}
+
+.description-input {
+  height: 100px;
+}
+
+mat-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.course-action-buttons button {
+  margin-right: 15px;
+}

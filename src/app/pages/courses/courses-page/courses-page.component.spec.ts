@@ -1,47 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
-import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
-import { SearchComponent } from '../../components/search/search.component';
-import { CourseItemComponent } from '../../components/course-item/course-item.component';
+import { BreadcrumbsComponent } from '../../../components/breadcrumbs/breadcrumbs.component';
+import { SearchComponent } from '../../../components/search/search.component';
+import { CourseItemComponent } from '../../../components/course-item/course-item.component';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '../../material.module';
-import { DurationPipe } from '../../pipes/duration/duration.pipe';
+import { MaterialModule } from '../../../material.module';
+import { DurationPipe } from '../../../pipes/duration/duration.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FilterByPipe } from '../../pipes/filter-by/filter-by.pipe';
-import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
+import { FilterByPipe } from '../../../pipes/filter-by/filter-by.pipe';
+import { OrderByPipe } from '../../../pipes/order-by/order-by.pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { CourseItemDeleteDialogComponent } from '../../components/course-item-delete-dialog/course-item-delete-dialog.component';
-import { CoursesService } from '../../services/courses/courses.service';
-
-const courses = [
-  {
-    id: 1,
-    title: 'title',
-    duration: 50,
-    description: 'descriptrion',
-    createdDate: new Date()
-  },
-  {
-    id: 2,
-    title: 'title',
-    duration: 50,
-    description: 'descriptrion',
-    createdDate: new Date()
-  },
-  {
-    id: 3,
-    title: 'title',
-    duration: 50,
-    description: 'descriptrion',
-    createdDate: new Date()
-  }
-];
+import { CourseItemDeleteDialogComponent } from '../../../components/course-item-delete-dialog/course-item-delete-dialog.component';
+import { CoursesService } from '../../../services/courses/courses.service';
+import { BehaviorSubject } from 'rxjs';
+import { Course } from '../../../models/course';
+import { multipleCourses as courses } from '../../../data/mock_courses';
 
 class MockCoursesService {
+  private _courses = new BehaviorSubject<Course[]>([]);
+  private courses$ = this._courses.asObservable();
+
   getList() {
-    return courses;
+    this._courses.next(courses);
+    return this.courses$;
   }
+
 }
 
 describe('CoursesPageComponent', () => {

@@ -6,7 +6,7 @@
 
 .content {
   flex: 1 0 auto;
-  max-width: 1850px;
+  width: 1850px;
   margin: 30px auto;
 }
 
@@ -16,3 +16,20 @@
   }
 }
 
+@media screen and (max-width: 1700px) {
+  .content {
+    max-width: auto;
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  .content {
+    max-width: 925px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .content {
+    max-width: 600px;
+  }
+}

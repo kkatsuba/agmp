@@ -3,10 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthorizationComponent } from './authorization.component';
 import { AuthorizationService } from '../../services/authorization/authorization.service';
 import { By } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
-import { rootReducer } from '../../redux/app.reducer';
+import { Subject } from 'rxjs';
 
 describe('AuthorizationComponent', () => {
+  const login = new Subject<string>();
   let component: AuthorizationComponent;
   let fixture: ComponentFixture<AuthorizationComponent>;
 
@@ -15,16 +15,6 @@ describe('AuthorizationComponent', () => {
       declarations: [ AuthorizationComponent ],
       providers: [
         { provide: AuthorizationService, useValue: jasmine.createSpy('AuthorizationService', AuthorizationService) },
-      ],
-      imports: [
-        StoreModule.forRoot(rootReducer, {
-          initialState: {
-            auth: {
-              email: 'login',
-              validated: true
-            }
-          }
-        })
       ]
     })
     .compileComponents();
@@ -33,6 +23,10 @@ describe('AuthorizationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthorizationComponent);
     component = fixture.componentInstance;
+
+    login.next('login');
+    component.login = login.asObservable();
+
     fixture.detectChanges();
   });
 
@@ -41,7 +35,9 @@ describe('AuthorizationComponent', () => {
   });
 
   it('trigger logOff event handler', () => {
-    const logOffButton = fixture.debugElement.query(By.css('.log-off'));
-    logOffButton.triggerEventHandler('click', null);
+    component.login.subscribe(() => {
+      const logOffButton = fixture.debugElement.query(By.css('.log-off'));
+      logOffButton.triggerEventHandler('click', null);
+    });
   });
 });

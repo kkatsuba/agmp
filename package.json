@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "start": "node server",
+    "start": "node server --aot",
     "build": "ng build --prod --aot",
     "test-ci": "ng test --code-coverage",
     "test": "set NODE_ENV=local&&ng test --code-coverage",
@@ -37,6 +37,7 @@
     "moment": "^2.22.2",
     "ngrx-store-localstorage": "^5.0.1",
     "rxjs": "^6.2.1",
+    "rxjs-compat": "^6.2.2",
     "serializer.ts": "0.0.12",
     "zone.js": "^0.8.26"
   },

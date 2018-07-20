@@ -9,11 +9,15 @@ import {
 
 @Injectable()
 export class AuthorizationService {
+  public userEmail;
+
   constructor(
     private router: Router,
     private store: Store<AppState>,
     private state: State<AppState>
-  ) {}
+  ) {
+    this.userEmail = this.store.select(appState => appState.auth.email);
+  }
 
   signIn(email: string, password: string, nextRoute: string) {
     if (password && email) {

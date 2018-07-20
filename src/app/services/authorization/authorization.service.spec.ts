@@ -13,7 +13,7 @@ describe('AuthorizationService', () => {
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     stateSpy = jasmine.createSpyObj('State', ['value']);
-    storeSpy = jasmine.createSpyObj('Store', ['dispatch']);
+    storeSpy = jasmine.createSpyObj('Store', ['dispatch', 'select']);
   });
 
   beforeEach(() => {

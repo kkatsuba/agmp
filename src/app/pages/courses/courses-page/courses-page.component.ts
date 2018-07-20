@@ -1,29 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ICourse, Course } from '../../models/course';
-import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
-import { CoursesService } from '../../services/courses/courses.service';
-import { CourseItemDeleteDialogComponent } from '../../components/course-item-delete-dialog/course-item-delete-dialog.component';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Course } from '../../../models/course';
+import { CoursesService } from '../../../services/courses/courses.service';
+import { CourseItemDeleteDialogComponent } from '../../../components/course-item-delete-dialog/course-item-delete-dialog.component';
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.css'],
-  providers: [OrderByPipe]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesPageComponent implements OnInit {
-  courses: Array<ICourse>;
+  courses$: Observable<Course[]>;
   search = '';
 
   constructor(
-    private orderByPipe: OrderByPipe,
     private coursesService: CoursesService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.courses = this.coursesService.getList();
-    this.courses = this.orderByPipe.transform(this.courses, 'createdDate');
+    this.courses$ = this.coursesService.getList();
   }
 
   deleteCourse(course: Course) {
@@ -34,7 +32,7 @@ export class CoursesPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.courses = this.coursesService.remove(course.id);
+        this.coursesService.remove(course.id);
       }
     });
   }
