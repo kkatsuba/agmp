@@ -1,0 +1,12 @@
+.breadcrumbs li {
+  display: inline;
+  list-style-type: none;
+}
+
+.link {
+  color: #ffffff;
+}
+
+.devider {
+  margin: 0 10px;
+}

@@ -1,8 +1,7 @@
 <div class="courses-page">
-  <app-breadcrumbs></app-breadcrumbs>
   <div class="courses-header">
     <app-search class="courses-search" (filterChange)="search = $event"></app-search>
-    <a routerLink="/course/new">
+    <a routerLink="/courses/new">
       <button mat-raised-button color="primary">Add course</button>
     </a>
   </div>
@@ -20,3 +19,5 @@
   </div>
   <button mat-raised-button color="primary" class="load-more">Load more</button>
 </div>
+
+<router-outlet></router-outlet>

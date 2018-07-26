@@ -1,3 +1,9 @@
-<p>
-  Courses
-</p>
+<mat-toolbar color="primary" *ngIf="(breadcrumbs$ | async).length">
+  <ul class="breadcrumbs">
+    <li *ngFor="let breadcrumb of breadcrumbs$ | async; let isLast = last; let i = index;">
+      <a [routerLink]="[breadcrumb.url, breadcrumb.params]" class="link" *ngIf="!isLast">{{breadcrumb.label}}</a>
+      <span *ngIf="isLast">{{breadcrumb.label}}</span>
+      <span *ngIf="!isLast" class="devider">/</span>
+    </li>
+  </ul>
+</mat-toolbar>

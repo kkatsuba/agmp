@@ -2,3 +2,7 @@
   font-size: 30px;
   color: rgb(253, 87, 61);
 }
+
+.logo-link {
+  text-decoration: none;
+}

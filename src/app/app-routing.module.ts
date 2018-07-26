@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 const router: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
@@ -13,18 +14,12 @@ const router: Routes = [
     canActivate: [AuthGuardService],
     loadChildren: './pages/courses/courses.module#CoursesModule',
     data: {
-      breadscrumb: 'Courses'
-    },
+      allowBreadcrumbs: true
+    }
   },
   {
-    path: 'course/:id/edit',
-    canActivate: [AuthGuardService],
-    loadChildren: './pages/edit-course/edit-course.module#EditCourseModule'
-  },
-  {
-    path: 'course/new',
-    canActivate: [AuthGuardService],
-    loadChildren: './pages/create-course/create-course.module#CreateCourseModule'
+    path: '**',
+    component: NotFoundPageComponent
   }
 ];
 
