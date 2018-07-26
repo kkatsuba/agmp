@@ -1,10 +1,10 @@
-interface Breadcrumb {
+export interface Breadcrumb {
   label: string;
   params: object;
   url: string;
 }
 
-interface BreadcrumbSubject {
+export interface BreadcrumbSubject {
   routePath: string;
   breadcrumb: Breadcrumb;
 }

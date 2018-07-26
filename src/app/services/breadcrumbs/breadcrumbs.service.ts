@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import _merge from 'lodash/merge';
 import { map } from 'rxjs/operators';
+import { BreadcrumbSubject, Breadcrumb } from '../../models/breadcrumbs';
 
 @Injectable({
   providedIn: 'root'
