@@ -2,7 +2,6 @@ import './rxjs.imports';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
@@ -16,6 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { CoursesService } from './services/courses/courses.service';
 import { AppStore } from './redux/app.store';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbsService } from './services/breadcrumbs/breadcrumbs.service';
 
 @NgModule({
   declarations: [
@@ -23,21 +25,22 @@ import { AppStore } from './redux/app.store';
     HeaderComponent,
     FooterComponent,
     LogoComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    NotFoundPageComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     SharingModule,
-    ReactiveFormsModule,
-    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AppStore
   ],
   providers: [
     AuthorizationService,
-    CoursesService
+    CoursesService,
+    BreadcrumbsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,9 @@
+.not-found-page {
+  display: flex;
+  justify-content: center;
+}
+
+.not-found-img {
+  height: 600px;
+  max-width: 100%;
+}

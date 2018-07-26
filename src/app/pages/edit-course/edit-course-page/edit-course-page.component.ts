@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../../models/course';
-import { CoursesService } from '../../../services/courses/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { Course } from '../../../models/course';
+import { CoursesService } from '../../../services/courses/courses.service';
+import { BreadcrumbsService } from '../../../services/breadcrumbs/breadcrumbs.service';
 
 @Component({
   selector: 'app-edit-course-page',
@@ -16,12 +17,14 @@ export class EditCoursePageComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private breadcrumbsService: BreadcrumbsService
   ) {}
 
   ngOnInit() {
     const id: number = +this.route.snapshot.paramMap.get('id');
     this.course = this.coursesService.getById(id);
+    this.breadcrumbsService.changeBreadcrum(this.route.parent.routeConfig.path, this.course.title);
   }
 
   saveCourse(course: Course) {
