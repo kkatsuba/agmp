@@ -5,10 +5,7 @@ import { MaterialModule } from '../../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorizationService } from '../../../services/authorization/authorization.service';
-
-class MockAuthorizationService {
-  logOff() { }
-}
+import { Store } from '@ngrx/store';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -17,8 +14,11 @@ describe('LoginPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginPageComponent ],
-      providers: [{ provide: AuthorizationService, useClass: MockAuthorizationService }],
-      imports: [MaterialModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule]
+      imports: [MaterialModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+      providers: [
+        { provide: AuthorizationService, useValue: jasmine.createSpyObj('AuthorizationService', ['signIn']) },
+        { provide: Store, useValue: jasmine.createSpyObj('Store', ['select']) }
+      ],
     })
     .compileComponents();
   }));

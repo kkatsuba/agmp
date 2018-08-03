@@ -3,6 +3,7 @@ import './rxjs.imports';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 import { SharingModule } from './sharing.module';
@@ -18,6 +19,7 @@ import { AppStore } from './redux/app.store';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { BreadcrumbsService } from './services/breadcrumbs/breadcrumbs.service';
+import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -35,12 +37,14 @@ import { BreadcrumbsService } from './services/breadcrumbs/breadcrumbs.service';
     SharingModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppStore
+    AppStore,
+    HttpClientModule
   ],
   providers: [
     AuthorizationService,
     CoursesService,
-    BreadcrumbsService
+    BreadcrumbsService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

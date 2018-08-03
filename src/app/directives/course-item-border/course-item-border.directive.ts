@@ -6,18 +6,18 @@ const COURSE_ACTIVE_DAYS = 14;
   selector: '[appCourseItemBorder]'
 })
 export class CourseItemBorderDirective implements OnInit {
-  @Input() createdDate: any;
+  @Input() date: any;
 
   constructor(private element: ElementRef) {}
 
   ngOnInit() {
-    const createdTime = this.createdDate.getTime();
+    const createdTime = this.date.getTime();
     const now = new Date();
     const activeTime = (new Date()).setDate(now.getDate() - COURSE_ACTIVE_DAYS);
 
     let borderColor;
 
-    if (createdTime < now.getTime() && this.createdDate >= activeTime) {
+    if (createdTime < now.getTime() && this.date >= activeTime) {
       borderColor = 'green';
     }
 

@@ -1,4 +1,5 @@
-<div class="course-edit">
+<div class="course-edit" *ngIf="course">
+  <app-spinner-overlay [display]="fetching"></app-spinner-overlay>
   <app-course-form
     [course]="course"
     (save)="saveCourse($event)"

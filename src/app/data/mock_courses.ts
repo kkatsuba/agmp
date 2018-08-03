@@ -3,8 +3,9 @@ export const singleCourse = {
   title: 'title',
   duration: 50,
   description: 'descriptrion',
-  createdDate: new Date(),
-  topRated: true
+  date: new Date(),
+  topRated: true,
+  authors: []
 };
 
 export const multipleCourses = [
@@ -13,23 +14,26 @@ export const multipleCourses = [
     title: 'title',
     duration: 50,
     description: 'descriptrion',
-    createdDate: new Date(),
-    topRated: true
+    date: new Date(),
+    topRated: true,
+    authors: []
   },
   {
     id: 2,
     title: 'title',
     duration: 50,
     description: 'descriptrion',
-    createdDate: new Date(),
-    topRated: false
+    date: new Date(),
+    topRated: false,
+    authors: []
   },
   {
     id: 3,
     title: 'title',
     duration: 50,
     description: 'descriptrion',
-    createdDate: new Date(),
-    topRated: false
+    date: new Date(),
+    topRated: false,
+    authors: []
   }
 ];

@@ -1,4 +1,11 @@
 <div class="form-wrap">
+  <mat-chip-list class="offer">
+    <mat-chip color="primary" selected>
+      <p>Only today mega cool offfffer!!! </p>
+      <p>Nothig to do just login with <b>Warner@email.com</b> email and <b>ea</b> password for free access.</p>
+    </mat-chip>
+  </mat-chip-list>
+
   <mat-card>
     <mat-card-content>
       <form class="login-form">
@@ -18,6 +25,7 @@
           </mat-error>
         </mat-form-field>
       </form>
+      <div *ngIf="serverError$ | async" class="mat-error">{{ serverError$ | async }}</div>
     </mat-card-content>
     <div class="course-action-buttons">
       <button mat-raised-button color="primary" [disabled]="isDisabled()" (click)="signIn()">Sign In</button>

@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./create-course.component.css']
 })
 export class CreateCourseComponent {
+  fetching = false;
   course: Course;
   courseForm: FormGroup;
 
@@ -19,8 +20,12 @@ export class CreateCourseComponent {
   ) {}
 
   saveCourse(course: Course) {
-    this.coursesService.createCourse(course);
-    this.cancel();
+    this.fetching = true;
+    this.coursesService.createCourse(course).subscribe(() => {
+      this.cancel();
+    }, () => {
+      this.fetching = false;
+    });
   }
 
   cancel() {
