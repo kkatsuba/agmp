@@ -3,7 +3,7 @@ addons:
   chrome: stable
 language: node_js
 node_js:
-- lts/*
+- "10.8.0"
 install:
 - npm install -g @angular/cli firebase-tools
 - npm ci
