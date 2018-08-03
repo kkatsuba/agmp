@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthorizationService } from '../../../services/authorization/authorization.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../redux/app.state';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
+  serverError$;
   loginForm: FormGroup;
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
@@ -18,7 +22,9 @@ export class LoginPageComponent implements OnInit {
     Validators.required
   ]);
 
-  constructor(private auth: AuthorizationService) {}
+  constructor(private auth: AuthorizationService, private store: Store<AppState>) {
+    this.serverError$ = this.store.select(state => state.auth.loginError);
+  }
 
   ngOnInit() {
     this.loginForm = new FormGroup({

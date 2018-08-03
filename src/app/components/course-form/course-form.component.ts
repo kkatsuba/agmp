@@ -25,7 +25,7 @@ export class CourseFormComponent implements OnInit {
       id: this.course.id,
       title: [this.course.title, Validators.required],
       description: [this.course.description, Validators.required],
-      createdDate: [this.course.createdDate, Validators.required],
+      date: [this.course.date, Validators.required],
       duration: [this.course.duration, Validators.required],
       authors: this.formBuilder.array([])
     });

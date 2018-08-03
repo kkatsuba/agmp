@@ -1,4 +1,4 @@
-<mat-card class="course-card" appCourseItemBorder [createdDate]="course.createdDate">
+<mat-card class="course-card" appCourseItemBorder [date]="course.date">
   <mat-card-header>
     <mat-card-title>
       <span>{{course.title | uppercase}}</span>
@@ -6,7 +6,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       <div>Duration: {{course.duration | duration}}</div>
-      <div>{{course.createdDate | date}}</div>
+      <div>{{course.date | date}}</div>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

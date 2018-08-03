@@ -6,7 +6,9 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { rootReducer } from './app.reducer';
 
 const persistConfig = {
-  keys: ['auth'],
+  keys: [{
+    auth: ['token', 'email']
+  }],
   rehydrate: true
 };
 export function localStorageSyncReducer(reducer) {

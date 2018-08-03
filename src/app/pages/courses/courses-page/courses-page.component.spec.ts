@@ -13,20 +13,11 @@ import { OrderByPipe } from '../../../pipes/order-by/order-by.pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CourseItemDeleteDialogComponent } from '../../../components/course-item-delete-dialog/course-item-delete-dialog.component';
 import { CoursesService } from '../../../services/courses/courses.service';
-import { BehaviorSubject } from 'rxjs';
-import { Course } from '../../../models/course';
+import { of } from 'rxjs';
 import { multipleCourses as courses } from '../../../data/mock_courses';
-
-class MockCoursesService {
-  private _courses = new BehaviorSubject<Course[]>([]);
-  private courses$ = this._courses.asObservable();
-
-  getList() {
-    this._courses.next(courses);
-    return this.courses$;
-  }
-
-}
+import { Store } from '@ngrx/store';
+import { Router, ActivatedRoute } from '@angular/router';
+import { List } from 'immutable';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -45,7 +36,16 @@ describe('CoursesPageComponent', () => {
       ],
       imports: [FormsModule, MaterialModule, BrowserAnimationsModule],
       providers: [
-        { provide: CoursesService, useClass: MockCoursesService }
+        { provide: CoursesService, useValue: {} },
+        { provide: Store, useValue: jasmine.createSpyObj('Store', ['select', 'dispatch']) },
+        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
+        {
+          provide: ActivatedRoute, useValue: {
+            queryParams: {
+              subscribe: () => {}
+            }
+          }
+        }
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -61,6 +61,8 @@ describe('CoursesPageComponent', () => {
     });
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
+    component.courses$ = of(List(courses));
+    component.isFetching$ = of(false);
     fixture.detectChanges();
   });
 

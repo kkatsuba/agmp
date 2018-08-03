@@ -1,66 +1,85 @@
 import { Injectable } from '@angular/core';
-import courses from '../../data/courses.json';
 import { Course } from '../../models/course';
 import { deserialize } from 'serializer.ts/Serializer';
-import { BehaviorSubject } from 'rxjs';
-import { OrderByPipe } from '../../pipes/order-by/order-by.pipe';
+import { HttpClient } from '@angular/common/http';
+import { AppState } from '../../redux/app.state';
+import { State, Store } from '@ngrx/store';
+import {
+  CoursesLoaded,
+  UpdateCourse,
+  LoadingCourses,
+  CreateCourse,
+  SearchCourses,
+  Reset
+} from '../../redux/courses/courses.actions';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private _courses = new BehaviorSubject<Course[]>([]);
-  private courses$ = this._courses.asObservable();
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+    private state: State<AppState>
+  ) {}
 
-  constructor(private orderByPipe: OrderByPipe) {
-    this._courses.next(deserialize<Course[]>(Course, courses));
+  loadNext() {
+    const page = this.state.value.courses.page;
+    const limit = this.state.value.courses.limit;
+    const params = {
+      start: `${page * limit}`,
+      count: limit + ''
+    };
+
+    this.store.dispatch(new LoadingCourses());
+    this.http.get<Course[]>('/api/courses', { params }).subscribe(courses => {
+      courses = deserialize<Course[]>(Course, courses);
+      this.store.dispatch(new CoursesLoaded(courses));
+    });
   }
 
-  getList() {
-    this._courses.next(
-      this.orderByPipe.transform(
-        this._courses.getValue(),
-        'createdDate'
-      )
+  reset() {
+    this.store.dispatch(new Reset());
+  }
+
+  createCourse(value: Course) {
+    return this.http.post<Course>(`/api/courses`, value).pipe(
+      map(course => {
+        course = deserialize<Course>(Course, course);
+        this.store.dispatch(new CreateCourse(course));
+      })
     );
-    return this.courses$;
-  }
-
-  createCourse(course: Course) {
-    const newCourses = this._courses.getValue();
-    course.id = newCourses.sort((a, b) => b.id - a.id)[0].id + 1;
-
-    this._courses.next([...this._courses.getValue(), course]);
   }
 
   getById(id: number) {
-    return this._courses.getValue().find(item => item.id === id);
+    return this.http
+      .get<Course>(`/api/courses/${id}`)
+      .pipe(map(course => deserialize<Course>(Course, course)));
   }
 
   update(value: Course) {
-    const newCourses = this._courses.getValue().map(course => {
-      if (course.id === value.id) {
-        course = {
-          ...course,
-          ...value
-        };
-      }
-      return course;
-    });
-
-    this._courses.next(newCourses);
+    return this.http.put<Course>(`/api/courses/${value.id}`, value).pipe(
+      map(course => {
+        course = deserialize<Course>(Course, course);
+        this.store.dispatch(new UpdateCourse(course));
+        return course;
+      })
+    );
   }
 
   remove(id: number) {
-    const newCourses = this._courses
-      .getValue()
-      .reduce((curr: Course[], course: Course) => {
-        if (course.id === id) {
-          return curr;
-        }
-        return [...curr, course];
-      }, []);
+    this.http.delete(`/api/courses/${id}`).subscribe(() => {
+      this.reset();
+      this.loadNext();
+    });
+  }
 
-    this._courses.next(newCourses);
+  search(value: string) {
+    const params = { textFragment: value };
+    this.http.get<Course[]>(`/api/courses`, { params }).subscribe(courses => {
+      courses = deserialize<Course[]>(Course, courses);
+      this.store.dispatch(new SearchCourses(courses));
+    });
   }
 }

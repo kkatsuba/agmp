@@ -1,4 +1,5 @@
 <div class="course-new">
+  <app-spinner-overlay [display]="fetching"></app-spinner-overlay>
   <app-course-form (save)="saveCourse($event)" (cancel)="cancel()">
   </app-course-form>
 </div>

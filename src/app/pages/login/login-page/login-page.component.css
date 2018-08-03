@@ -7,4 +7,10 @@
 .form-wrap {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.offer {
+  margin-bottom: 30px;
 }

@@ -1,12 +1,14 @@
 import { Type } from 'serializer.ts/Decorators';
+import { IAuthor } from './author';
 
 export interface ICourse {
   id: number;
   title: string;
   description?: string;
-  createdDate?: Date;
+  date?: Date;
   duration?: number;
   topRated: boolean;
+  authors: Array<IAuthor>;
 }
 
 export class Course implements ICourse {
@@ -17,9 +19,11 @@ export class Course implements ICourse {
   description?: string;
 
   @Type(() => Date)
-  createdDate?: Date;
+  date?: Date;
 
   duration?: number;
 
   topRated = false;
+
+  authors = null;
 }
