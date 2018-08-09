@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { MaterialModule } from '../../material.module';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { SpinnerOverlayModule } from '../../components/spinner-overlay/spinner-overlay.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     LoginRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SpinnerOverlayModule
   ],
   declarations: [
     LoginPageComponent

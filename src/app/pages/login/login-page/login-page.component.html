@@ -1,4 +1,5 @@
 <div class="form-wrap">
+  <app-spinner-overlay [display]="display | async"></app-spinner-overlay>
   <mat-chip-list class="offer">
     <mat-chip color="primary" selected>
       <p>Only today mega cool offfffer!!! </p>
@@ -25,10 +26,10 @@
           </mat-error>
         </mat-form-field>
       </form>
-      <div *ngIf="serverError$ | async" class="mat-error">{{ serverError$ | async }}</div>
+      <div *ngIf="serverError | async" class="mat-error">{{ serverError | async }}</div>
     </mat-card-content>
     <div class="course-action-buttons">
-      <button mat-raised-button color="primary" [disabled]="isDisabled()" (click)="signIn()">Sign In</button>
+      <button mat-raised-button color="primary" (click)="signIn()">Sign In</button>
     </div>
   </mat-card>
 </div>

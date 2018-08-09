@@ -6,17 +6,18 @@
     </a>
   </div>
 
-  <div *ngIf="!(courses$ | async).size">
+  <div *ngIf="!(courses | async).size">
     No data. Feel free to add new course.
   </div>
 
   <div class="courses-list">
-    <app-course-item *ngFor="let course of (courses$ | async)" [course]="course" (deleteCourse)="deleteCourse($event)">
+    <app-course-item *ngFor="let course of (courses | async)" [course]="course" (deleteCourse)="deleteCourse($event)">
     </app-course-item>
   </div>
 
-  <mat-spinner *ngIf="isFetching$ | async"></mat-spinner>
-  <button mat-raised-button color="primary" class="load-more" *ngIf="!search" [disabled]="isFetching$ | async" (click)="loadMore()">Load more</button>
+  <mat-spinner *ngIf="coursesLoading | async"></mat-spinner>
+  <app-spinner-overlay [display]="showOverlay | async"></app-spinner-overlay>
+  <button mat-raised-button color="primary" class="load-more" *ngIf="!search" [disabled]="coursesLoading | async" (click)="loadMore()">Load more</button>
 </div>
 
 <router-outlet></router-outlet>

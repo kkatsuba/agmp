@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthorizationComponent } from './authorization.component';
+import { UserActionsComponent } from './user-actions.component';
 import { AuthorizationService } from '../../services/authorization/authorization.service';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
-describe('AuthorizationComponent', () => {
+describe('UserActionsComponent', () => {
   const login = new Subject<string>();
-  let component: AuthorizationComponent;
-  let fixture: ComponentFixture<AuthorizationComponent>;
+  let component: UserActionsComponent;
+  let fixture: ComponentFixture<UserActionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthorizationComponent ],
+      declarations: [ UserActionsComponent ],
       providers: [
         { provide: AuthorizationService, useValue: jasmine.createSpy('AuthorizationService', AuthorizationService) },
       ]
@@ -21,7 +21,7 @@ describe('AuthorizationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthorizationComponent);
+    fixture = TestBed.createComponent(UserActionsComponent);
     component = fixture.componentInstance;
 
     login.next('login');

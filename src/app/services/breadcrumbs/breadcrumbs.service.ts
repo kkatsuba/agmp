@@ -9,10 +9,10 @@ import { BreadcrumbSubject, Breadcrumb } from '../../models/breadcrumbs';
 })
 export class BreadcrumbsService {
   _breadcrumbs = new BehaviorSubject<BreadcrumbSubject[]>([]);
-  breadcrumbs$: Observable<Breadcrumb[]>;
+  breadcrumbs: Observable<Breadcrumb[]>;
 
   constructor() {
-    this.breadcrumbs$ = this._breadcrumbs.asObservable().pipe(
+    this.breadcrumbs = this._breadcrumbs.asObservable().pipe(
       map(data => data.map(value => value.breadcrumb))
     );
   }

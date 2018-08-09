@@ -10,6 +10,7 @@ import { MaterialModule } from '../../material.module';
 import { CourseItemDeleteDialogComponent } from '../../components/course-item-delete-dialog/course-item-delete-dialog.component';
 import { CourseItemBorderDirective } from '../../directives/course-item-border/course-item-border.directive';
 import { CoursesRootComponent } from './courses-root.component';
+import { SpinnerOverlayModule } from '../../components/spinner-overlay/spinner-overlay.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { CoursesRootComponent } from './courses-root.component';
     CoursesRoutingModule,
     MaterialModule,
     SharingModule,
-    FormsModule
+    FormsModule,
+    SpinnerOverlayModule
   ],
   declarations: [
     CoursesRootComponent,

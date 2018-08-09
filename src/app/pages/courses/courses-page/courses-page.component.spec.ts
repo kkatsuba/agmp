@@ -61,8 +61,8 @@ describe('CoursesPageComponent', () => {
     });
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
-    component.courses$ = of(List(courses));
-    component.isFetching$ = of(false);
+    component.courses = of(List(courses));
+    component.isFetching = of(false);
     fixture.detectChanges();
   });
 

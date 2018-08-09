@@ -1,3 +1,7 @@
+.courses-page {
+  position: relative;
+}
+
 .courses-header {
   display: flex;
   justify-content: space-between;

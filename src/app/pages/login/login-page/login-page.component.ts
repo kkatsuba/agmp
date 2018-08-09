@@ -3,6 +3,8 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthorizationService } from '../../../services/authorization/authorization.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/app.state';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -11,19 +13,21 @@ import { AppState } from '../../../redux/app.state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
-  serverError$;
+  display = new BehaviorSubject(false);
+  serverError: Observable<string>;
   loginForm: FormGroup;
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.email
   ]);
 
-  passwordFormControl: FormControl = new FormControl('', [
-    Validators.required
-  ]);
+  passwordFormControl: FormControl = new FormControl('', [Validators.required]);
 
-  constructor(private auth: AuthorizationService, private store: Store<AppState>) {
-    this.serverError$ = this.store.select(state => state.auth.loginError);
+  constructor(
+    private auth: AuthorizationService,
+    private store: Store<AppState>
+  ) {
+    this.serverError = this.store.select(state => state.auth.loginError);
   }
 
   ngOnInit() {
@@ -33,11 +37,19 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  isDisabled(): boolean {
-    return this.loginForm.status !== 'VALID';
-  }
-
   signIn() {
-    this.auth.signIn(this.emailFormControl.value, this.passwordFormControl.value, '/courses');
+    if (this.loginForm.status === 'VALID') {
+      this.display.next(true);
+      this.auth
+        .signIn(
+          this.emailFormControl.value,
+          this.passwordFormControl.value,
+          '/courses'
+        )
+        .subscribe(
+          () => this.display.next(false),
+          () => this.display.next(false)
+        );
+    }
   }
 }
