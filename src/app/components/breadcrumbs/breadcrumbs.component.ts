@@ -15,7 +15,7 @@ import { BreadcrumbsService } from '../../services/breadcrumbs/breadcrumbs.servi
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit {
-  breadcrumbs$: Observable<any[]>;
+  breadcrumbs: Observable<any[]>;
 
   constructor(
     private router: Router,
@@ -31,7 +31,7 @@ export class BreadcrumbsComponent implements OnInit {
         this.getBreadcrumbs(this.activatedRoute.root);
       });
 
-    this.breadcrumbs$ = this.breadcrumbsService.breadcrumbs$;
+    this.breadcrumbs = this.breadcrumbsService.breadcrumbs;
   }
 
   getBreadcrumbs(route: ActivatedRoute, url = '', breadcrumbs = []) {

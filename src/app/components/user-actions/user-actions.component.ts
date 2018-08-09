@@ -3,11 +3,10 @@ import { AuthorizationService } from '../../services/authorization/authorization
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-authorization',
-  templateUrl: './authorization.component.html',
-  styleUrls: ['./authorization.component.css']
+  selector: 'app-user-actions',
+  templateUrl: './user-actions.component.html'
 })
-export class AuthorizationComponent {
+export class UserActionsComponent {
   login: Observable<string>;
 
   constructor(private auth: AuthorizationService) {

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { UserActionsComponent } from './components/user-actions/user-actions.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { CoursesService } from './services/courses/courses.service';
@@ -27,7 +27,7 @@ import { AuthInterceptor } from './services/auth-interceptor/auth-interceptor';
     HeaderComponent,
     FooterComponent,
     LogoComponent,
-    AuthorizationComponent,
+    UserActionsComponent,
     NotFoundPageComponent,
     BreadcrumbsComponent
   ],

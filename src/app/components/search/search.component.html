@@ -1,4 +1,4 @@
 <mat-form-field class="search-input">
-  <input matInput placeholder="Search" [(ngModel)]="searchValue" />
+  <input matInput placeholder="Search" (keyup)="search.next($event.target.value)" [value]="searchValue"/>
 </mat-form-field>
-<button class="search-btn" mat-raised-button color="primary" (click)="onSearch()">Search</button>
+

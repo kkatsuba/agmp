@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { SearchComponent } from './search.component';
 import { MaterialModule } from '../../material.module';
@@ -28,8 +28,17 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('search click event handler', () => {
-    const searchButton = fixture.debugElement.query(By.css('.search-btn'));
-    searchButton.triggerEventHandler('click', null);
-  });
+  it('hz', fakeAsync(() => {
+    spyOn(component.filterChange, 'emit');
+    fixture.detectChanges();
+
+    const searchInput = fixture.debugElement.query(By.css('input'));
+    searchInput.triggerEventHandler('keyup', {
+      target: { value: 'aaaa' }
+    });
+
+    tick(300);
+    expect(component.filterChange.emit).toHaveBeenCalledWith('aaaa');
+  }));
+
 });

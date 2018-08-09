@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 @Component({ selector: 'app-logo', template: '' })
 class LogoComponent {}
 
-@Component({ selector: 'app-authorization', template: '' })
-class AuthorizationComponent {}
+@Component({ selector: 'app-user-actions', template: '' })
+class UserActionsComponent {}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -16,7 +16,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent, LogoComponent, AuthorizationComponent],
+      declarations: [HeaderComponent, LogoComponent, UserActionsComponent],
       imports: [MaterialModule],
     }).compileComponents();
   }));

@@ -8,12 +8,14 @@ import {
   loginError
 } from '../../redux/authorization/authorization.actions';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Helper } from '../helper';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthorizationService {
-  public userEmail;
+  public userEmail: Observable<string>;
+  public isAuthenticated: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -22,6 +24,9 @@ export class AuthorizationService {
     private http: HttpClient
   ) {
     this.userEmail = this.store.select(appState => appState.auth.email);
+    this.isAuthenticated = this.store
+      .select(appState => appState.auth.token)
+      .pipe(map(token => !!token));
   }
 
   signIn(login: string, password: string, nextRoute: string) {
@@ -29,27 +34,23 @@ export class AuthorizationService {
       this.store.dispatch(loginError('Password and login are required'));
     }
 
-    this.http
+    return this.http
       .post('/api/auth/login', { login, password })
       .pipe(
+        tap(({ token }: any) => {
+          this.store.dispatch(signIn(login, token));
+          this.router.navigate([nextRoute]);
+        }),
         catchError(error => {
           this.store.dispatch(loginError('Password or login is wrong'));
           return Helper.handleError(error);
         })
-      )
-      .subscribe(({ token }: any) => {
-        this.store.dispatch(signIn(login, token));
-        this.router.navigate([nextRoute]);
-      });
+      );
   }
 
   logOff() {
     this.store.dispatch(logOff);
     this.router.navigate(['/login']);
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.state.value.auth.token;
   }
 
   token(): string {
@@ -59,8 +60,6 @@ export class AuthorizationService {
   getUserInfo() {
     return this.http
       .post('/api/auth/userinfo', null)
-      .pipe(
-        catchError(Helper.handleError)
-      );
+      .pipe(catchError(Helper.handleError));
   }
 }

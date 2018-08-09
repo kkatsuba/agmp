@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-courses-page',
+  selector: 'app-courses-root',
   template: `
     <router-outlet></router-outlet>
   `,

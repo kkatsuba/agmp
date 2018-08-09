@@ -12,7 +12,8 @@ import {
   SearchCourses,
   Reset
 } from '../../redux/courses/courses.actions';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,11 @@ export class CoursesService {
     private state: State<AppState>
   ) {}
 
-  loadNext() {
+  loadNext(reset?: boolean) {
+    if (reset) {
+      this.reset();
+    }
+
     const page = this.state.value.courses.page;
     const limit = this.state.value.courses.limit;
     const params = {
@@ -68,11 +73,13 @@ export class CoursesService {
     );
   }
 
-  remove(id: number) {
-    this.http.delete(`/api/courses/${id}`).subscribe(() => {
-      this.reset();
-      this.loadNext();
-    });
+  remove(id: number): Observable<any> {
+    return this.http.delete(`/api/courses/${id}`).pipe(
+      tap(() => {
+        this.reset();
+        this.loadNext();
+      })
+    );
   }
 
   search(value: string) {
