@@ -9,7 +9,7 @@
     "build": "ng build --prod --aot",
     "test-ci": "ng test --code-coverage",
     "test": "set NODE_ENV=local&&ng test --code-coverage",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
     "e2e": "ng e2e",
     "postinstall": "npm run build",
     "ts": "tslint --project"

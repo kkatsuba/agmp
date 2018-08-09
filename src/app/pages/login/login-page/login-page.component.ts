@@ -4,7 +4,6 @@ import { AuthorizationService } from '../../../services/authorization/authorizat
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/app.state';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',

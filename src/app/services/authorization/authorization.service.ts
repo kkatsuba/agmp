@@ -8,7 +8,7 @@ import {
   loginError
 } from '../../redux/authorization/authorization.actions';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, delay, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Helper } from '../helper';
 import { Observable } from 'rxjs';
 

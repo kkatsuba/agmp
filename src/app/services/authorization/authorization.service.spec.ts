@@ -8,18 +8,26 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 import { SIGN_IN } from '../../redux/authorization/authorization.actions';
+import { of } from 'rxjs';
 
 describe('AuthorizationService', () => {
   let service: AuthorizationService;
-  let storeSpy;
-  let stateSpy;
-  let routerSpy;
-  let http;
+  let storeSpy, stateSpy, routerSpy, http;
+  const state = {
+    auth: { token: 123, email: 'email' }
+  };
 
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     stateSpy = jasmine.createSpyObj('State', ['value']);
     storeSpy = jasmine.createSpyObj('Store', ['dispatch', 'select']);
+
+    storeSpy = {
+      dispatch: jasmine.createSpy('dispatch'),
+      select: cb => {
+        return of(cb(state));
+      }
+    };
   });
 
   beforeEach(() => {
@@ -30,25 +38,38 @@ describe('AuthorizationService', () => {
         { provide: Router, useValue: routerSpy },
         { provide: State, useValue: stateSpy },
         { provide: Store, useValue: storeSpy }
-        // { provide: HttpClient, useValue: http },
       ]
     });
   });
 
   beforeEach(inject(
     [HttpTestingController, AuthorizationService],
-    (httpMock: HttpTestingController, authorizationService: AuthorizationService) => {
+    (
+      httpMock: HttpTestingController,
+      authorizationService: AuthorizationService
+    ) => {
       service = authorizationService;
+      service.isAuthenticated = of(true);
       http = httpMock;
     }
   ));
 
   it('should be created', () => {
+    service.userEmail.subscribe(email => {
+      expect(email).toBe(state.auth.email);
+    });
+
+    service.isAuthenticated.subscribe(result => {
+      expect(result).toBe(true);
+    });
     expect(service).toBeTruthy();
   });
 
   it('signIn() with redirect', () => {
-    service.signIn('emailo', 'pass', '/redirect');
+    service.signIn('emailo', 'pass', '/redirect').subscribe(response => {
+      expect(response.token).toBeDefined();
+      expect(response.token).toBe(123);
+    });
     const req = http.expectOne('/api/auth/login');
 
     req.flush({ token: 123 });

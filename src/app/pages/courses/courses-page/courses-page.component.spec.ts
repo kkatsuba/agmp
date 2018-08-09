@@ -62,24 +62,13 @@ describe('CoursesPageComponent', () => {
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
     component.courses = of(List(courses));
-    component.isFetching = of(false);
+    component.coursesLoading = of(false);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeDefined();
   });
-
-  // it('should delete course', () => {
-  //   const expected = [courses[0], courses[2]];
-  //   const course = new Course();
-  //   course.id = 2;
-  //   component.deleteCourse(course);
-  //   fixture.detectChanges();
-  //   expect(component.courses.length).toBe(expected.length);
-  //   expect(component.courses).toEqual(expected);
-  //   expect(fixture.debugElement.nativeNode.querySelectorAll('app-course-item').length).toBe(expected.length);
-  // });
 
   it('should render items', () => {
     expect(fixture.debugElement.nativeNode.querySelectorAll('app-course-item').length).toBe(courses.length);
