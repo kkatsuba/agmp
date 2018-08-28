@@ -1,43 +1,50 @@
-<mat-chip-list>
-  <mat-chip color="accent" selected>
-    <strong>Fields with '*' symbol are required for filling.</strong>
-  </mat-chip>
-</mat-chip-list>
 <form class="edit-form" [formGroup]="courseForm">
   <mat-form-field>
-    <mat-label>*Title:</mat-label>
+    <mat-label>Title:</mat-label>
     <input matInput placeholder="Course title" formControlName="title" />
+    <mat-error *ngIf="courseForm.controls.title.hasError('maxlength')">
+      Title must be less then 50 symbols
+    </mat-error>
+    <mat-error *ngIf="courseForm.controls.title.hasError('required')">
+      Title is required
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>*Description:</mat-label>
+    <mat-label>Description:</mat-label>
     <textarea matInput placeholder="Description" formControlName="description" class="description-input"></textarea>
+    <mat-error *ngIf="courseForm.controls.title.hasError('maxlength')">
+      Title must be less then 500 symbols
+    </mat-error>
+    <mat-error *ngIf="courseForm.controls.description.hasError('required')">
+      Date is required
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="small-input">
-    <mat-label>*Date:</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <app-date-input formControlName="date" appDateValidator class="inner-field"></app-date-input>
+    <mat-error *ngIf="courseForm.controls.date.hasError('date') && !courseForm.controls.date.hasError('required')">
+      Date format must be 'mm/dd/yyyy'
+    </mat-error>
+    <mat-error *ngIf="courseForm.controls.date.hasError('required') && !courseForm.controls.date.hasError('date')">
+      Date is required
+    </mat-error>
   </mat-form-field>
   <div>
     <mat-form-field class="small-input">
-      <mat-label>*Duration:</mat-label>
-      <input matInput placeholder="Duration" type="number" formControlName="duration" />
+      <app-duration-input formControlName="duration" appNumberValidator class="inner-field"></app-duration-input>
+      <mat-error *ngIf="courseForm.controls.duration.hasError('number')">
+        Duration must be a number
+      </mat-error>
+      <mat-error *ngIf="courseForm.controls.duration.hasError('required')">
+        Duration is required
+      </mat-error>
     </mat-form-field>
     {{courseForm.value.duration | duration }}
   </div>
   <mat-form-field>
-    <mat-label>Authors:</mat-label>
-    <mat-chip-list #authorsChip>
-      <mat-chip *ngFor="let author of courseForm.value.authors; let i = index;" removable (removed)="removeAuthor(i)" color="primary"
-        selected>
-        {{author}}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
-    <input
-      placeholder="Authors"
-      [matChipInputFor]="authorsChip"
-      (matChipInputTokenEnd)="addAuthor($event)">
+    <app-authors-input formControlName="authors" appAuthorsValidator class="inner-field"></app-authors-input>
+    <mat-error *ngIf="courseForm.controls.authors.hasError('authors')">
+      Authors are required. Need at least one author.
+    </mat-error>
   </mat-form-field>
 </form>
 <div class="course-action-buttons">

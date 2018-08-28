@@ -12,7 +12,11 @@
   height: 100px;
 }
 
-mat-label {
+:host /deep/ .mat-chip-list-wrapper {
+  margin: 5px 0;
+}
+
+:host /deep/ mat-label {
   font-size: 20px;
   font-weight: bold;
   color: #000000;
@@ -20,4 +24,22 @@ mat-label {
 
 .course-action-buttons button {
   margin-right: 15px;
+}
+
+
+.inner-field /deep/ .mat-form-field {
+  width: 100%;
+}
+
+.inner-field /deep/ .mat-form-field-wrapper {
+  padding: 0;
+}
+
+.inner-field /deep/ .mat-form-field-infix {
+  padding-bottom: 0;
+}
+
+.inner-field /deep/ .mat-form-field-underline,
+.inner-field /deep/ .mat-form-field-subscript-wrapper {
+  display: none;
 }

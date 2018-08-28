@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -9,17 +9,16 @@ import { debounceTime, filter } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
-  search = new Subject<string>();
+  search = new FormControl();
   @Input() searchValue: string;
   @Output() filterChange = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
-    this.search.next(this.searchValue);
-    this.search
+    this.search.setValue(this.searchValue);
+    this.search.valueChanges
       .pipe(
-        filter(value => value.length === 0 || value.length > 2),
         debounceTime(300)
       )
       .subscribe(value => {

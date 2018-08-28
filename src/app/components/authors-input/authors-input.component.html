@@ -1,0 +1,17 @@
+<mat-form-field>
+  <mat-label>Authors:</mat-label>
+  <div class="authors-input">
+    <input matInput placeholder="Authors" [matAutocomplete]="auto" (change)="onChange($event)" (keyup)="onChange($event)"/>
+    <mat-chip-list>
+      <mat-chip *ngFor="let author of value.value" removable (removed)="removeAuthor(author)" color="primary" selected>
+        {{author.firstName}} {{author.lastName}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="authorSelected($event)" [displayWith]="displayNull">
+    <mat-option *ngFor="let author of authors" [value]="author">
+      {{author.firstName}} {{author.lastName}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

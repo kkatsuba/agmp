@@ -14,6 +14,7 @@ import {
 } from '../../redux/courses/courses.actions';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { IAuthor } from '../../models/author';
 
 @Injectable({
   providedIn: 'root'
@@ -88,5 +89,9 @@ export class CoursesService {
       courses = deserialize<Course[]>(Course, courses);
       this.store.dispatch(new SearchCourses(courses));
     });
+  }
+
+  loadAuthors() {
+    return this.http.get<IAuthor[]>(`/api/authors`);
   }
 }
