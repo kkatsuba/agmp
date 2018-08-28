@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { SearchComponent } from '../../components/search/search.component';
@@ -16,6 +16,8 @@ import { SpinnerOverlayModule } from '../../components/spinner-overlay/spinner-o
   imports: [
     CommonModule,
     CoursesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     SharingModule,
     FormsModule,

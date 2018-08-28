@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Course } from '../../models/course';
+import { CustomValudators } from '../../lib/validators';
 
 @Component({
   selector: 'app-course-form',
@@ -23,11 +24,11 @@ export class CourseFormComponent implements OnInit {
   createForm() {
     this.courseForm = this.formBuilder.group({
       id: this.course.id,
-      title: [this.course.title, Validators.required],
-      description: [this.course.description, Validators.required],
+      title: [this.course.title, Validators.compose([Validators.required, Validators.maxLength(50)])],
+      description: [this.course.description, Validators.compose([Validators.required, Validators.maxLength(500)])],
       date: [this.course.date, Validators.required],
-      duration: [this.course.duration, Validators.required],
-      authors: this.formBuilder.array([])
+      duration: [this.course.duration, Validators.compose([Validators.required, CustomValudators.number])],
+      authors: [this.course.authors]
     });
   }
 

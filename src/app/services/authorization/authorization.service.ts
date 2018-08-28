@@ -9,7 +9,7 @@ import {
 } from '../../redux/authorization/authorization.actions';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Helper } from '../helper';
+import { Helper } from '../../lib/helper';
 import { Observable } from 'rxjs';
 
 @Injectable()

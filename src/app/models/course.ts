@@ -25,5 +25,5 @@ export class Course implements ICourse {
 
   topRated = false;
 
-  authors = null;
+  authors = [];
 }

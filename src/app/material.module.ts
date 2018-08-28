@@ -11,11 +11,13 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 @NgModule({
   exports: [
+    MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatToolbarModule,

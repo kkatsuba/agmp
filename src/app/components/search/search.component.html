@@ -1,4 +1,4 @@
 <mat-form-field class="search-input">
-  <input matInput placeholder="Search" (keyup)="search.next($event.target.value)" [value]="searchValue"/>
+  <input matInput placeholder="Search" [formControl]="search"/>
 </mat-form-field>
 
