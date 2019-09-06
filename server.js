@@ -9,6 +9,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.join(__dirname, '/dist/agmp')));
 
 app.get('*', function(request, response, next) {
+  console.log('requester', request.ip, request.ips)
   if (!request.url.match('\/api')) {
     response.sendFile(path.join(__dirname, '/dist/agmp/index.html'));
  }
